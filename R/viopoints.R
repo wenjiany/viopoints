@@ -84,6 +84,9 @@ viopoints.default <- function(x, ..., groups, na.group=FALSE,
   }
   if (points)
     pp <- lapply(list(pch=pch, cex=cex, col=col, bg=bg), reps)
+    if (length(col)==length(x[[1]])) {
+       pp$col <- split(col, x[[2]])
+    }
   if (lines) 
     lp <- lapply(list(lty=line.lty, lwd=line.lwd, col=line.col), reps)
   side <- rep(side, length.out=mn)
@@ -195,10 +198,10 @@ viopoints.default <- function(x, ..., groups, na.group=FALSE,
         }
         if (horizontal) {
           points(z1, at[k] + d,
-            pch=pp$pch[k], cex=pp$cex[k], col=pp$col[k], bg=pp$bg[k])
+            pch=pp$pch[k], cex=pp$cex[k], col=pp$col[[k]], bg=pp$bg[k])
         } else {
           points(at[k] + d, z1,
-            pch=pp$pch[k], cex=pp$cex[k], col=pp$col[k], bg=pp$bg[k])
+            pch=pp$pch[k], cex=pp$cex[k], col=pp$col[[k]], bg=pp$bg[k])
         }
       }
     }
